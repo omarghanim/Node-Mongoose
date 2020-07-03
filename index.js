@@ -15,12 +15,27 @@ connect.then((db)=>{
     })
     .then((Dish)=>{
       console.log(Dish);
-      return Dishes.find({}).exec();
+      return Dishes.findByIdAndUpdate(Dish._id ,{$set:{description:"Updated Test"}
+    },{new:true
+
     })
-    .then((dishes)=>{
-      console.log(dishes);
-      return Dishes.deleteOne({});
+      .exec()
     })
+    .then((Dish)=>{
+      console.log(Dish)
+      Dish.comments.push({
+        rating:5,
+        comment:"I'm getting sinking feeling",
+        author:"Omar Ghanim"
+      });
+      return Dish.save();
+      })
+      .then((Dish)=>{
+        console.log(Dish);
+        return Dishes.deleteOne({});
+
+      })
+
     .then(()=>{
       return mongoose.connection.close();
     })
