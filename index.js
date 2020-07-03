@@ -6,18 +6,16 @@ const url = 'mongodb://localhost:27017/conFusion';
 
 const connect = mongoose.connect(url,{ useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true});
 
-
 connect.then((db)=>{
 
     console.log('Connected correctly to server');
-    var newDish = new Dishes({
+    Dishes.create({
       name: 'Uthappizza',
        description: 'test'
-    });
-    newDish.save()
+    })
     .then((Dish)=>{
       console.log(Dish);
-      return Dishes.find({});
+      return Dishes.find({}).exec();
     })
     .then((dishes)=>{
       console.log(dishes);

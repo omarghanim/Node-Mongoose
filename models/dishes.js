@@ -11,6 +11,9 @@ const dishSchema = new Schema({
         type: String,
         required: true
     }
+  },{
+      timestamps:true
+
 });
 
 var Dishes = mongoose.model('Dish', dishSchema);
